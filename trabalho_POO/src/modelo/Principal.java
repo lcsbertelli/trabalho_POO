@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabalho_poo;
+package modelo;
+
+import excecoes.MaxUsersException;
 
 /**
  *
@@ -11,11 +13,8 @@ package trabalho_poo;
  */
 public class Principal {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args){
+        System.out.println("Classe Principal do Projeto de POO");
     }
     
 }
