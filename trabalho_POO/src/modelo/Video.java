@@ -1,138 +1,66 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
-import enums.Categoria;
-
 /**
- *
- * @author lucas
+ * Esta classe está no lugar de InfoCatalogo (antigo Video) na ligacao entre usuário e filmes/episódios
+ * 
  */
-public class Video {
-    private String nome;
-    private double estrelas;
-    private int classificEtaria;
+public abstract class Video {
+    private String sinopse;
     private double duracaoTotal;
     private double duracaoCreditos;
-    private List<Ator> atoresPrincipais;
-    private List<Diretor> direcao;
-    private Map<Usuario, Double> avaliacoes;
-    private List<Categoria> categorias;
-
-    public Video(String nome, int classificEtaria, double duracaoTotal, double duracaoCreditos, List<Ator> atoresPrincipais, List<Diretor> direcao, List<Categoria> categorias) {
-        this.nome = nome;
-        this.classificEtaria = classificEtaria;
+    private InfoCatalogo descricao;
+    
+    public Video(String sinopse, double duracaoTotal, double duracaoCreditos) {
+        this.sinopse = sinopse;
         this.duracaoTotal = duracaoTotal;
         this.duracaoCreditos = duracaoCreditos;
-        this.atoresPrincipais = atoresPrincipais;
-        this.direcao = direcao;
-        this.categorias = categorias;
-        this.avaliacoes = new HashMap<Usuario, Double>();
     }
     
-    // calcula ou recalcula a nova média aritmética das notas de avaliacao do video
-    public void calcularEstrelas(){
-        double soma = 0;
-        for(Usuario usuario : avaliacoes.keySet()){
-            soma += avaliacoes.get(usuario);
-        }
-        this.estrelas = (soma/avaliacoes.size());
+    // delegando o registro de nota para o objeto descricao (InfoCatalogo)
+    public void registrarAvaliacao(Usuario usuario, double nota) {
+        descricao.novaAvaliacao(usuario, nota);
     }
     
-    // Esse metodo verifica se é uma Nova Avaliacao ou uma Reavaliacao e recalcula as estrelas do video.  
-    public void novaAvaliacao(Usuario usuario, double nota){
-        
-        if(avaliacoes.containsKey(usuario)){ // Reavaliacao da Nota 
-            this.avaliacoes.replace(usuario, nota);
-            calcularEstrelas();
-        }else{ //Nova Avaliacao   
-            this.avaliacoes.put(usuario, nota);
-            calcularEstrelas();
-        }        
-    } 
+    // setters
     
-    public void addAtor(Ator ator){
-        this.atoresPrincipais.add(ator);
-    }
-    public void removerAtor(Ator ator){
-        this.atoresPrincipais.remove(ator);
-    }
-    
-    public void addDiretor(Diretor diretor){
-        this.direcao.add(diretor);
-    }
-    public void removerDiretor(Diretor diretor){
-        this.direcao.remove(diretor);
-    }
-    
-    public void addCategoria(Categoria categoria){
-        this.categorias.add(categoria);
-    }
-    
-    public void removerCategoria(Categoria categoria){
-        this.categorias.remove(categoria);
-    }
-    
-    
-    
-    // ### Getters and Setters
-    
-    
-    public Map<Usuario, Double> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }     
-    
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    public void setClassificEtaria(int classificEtaria) {
-        this.classificEtaria = classificEtaria;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
     }
     
     public void setDuracaoTotal(double duracaoTotal) {
         this.duracaoTotal = duracaoTotal;
     }
-
+    
     public void setDuracaoCreditos(double duracaoCreditos) {
         this.duracaoCreditos = duracaoCreditos;
     }
     
-    public String getNome() {
-        return nome;
+    public void setDescricao(InfoCatalogo descricao) {
+        this.descricao = descricao;
     }
     
-    public double getEstrelas() {
-        return estrelas;
-    }
-
-    public int getClassificEtaria() {
-        return classificEtaria;
+    // getters
+    
+    public String getSinopse() {
+        return sinopse;
     }
     
     public double getDuracaoTotal() {
         return duracaoTotal;
     }
-
+    
+    
     public double getDuracaoCreditos() {
         return duracaoCreditos;
     }
-
-    public List<Ator> getAtoresPrincipais() {
-        return atoresPrincipais;
-    }
-
-    public List<Diretor> getDirecao() {
-        return direcao;
-    }
     
+    public InfoCatalogo getDescricao() {
+        return descricao;
+    }
     
 }

@@ -8,17 +8,22 @@ import modelo.Usuario;
 import modelo.Video;
 import modelo.Ator;
 import modelo.Diretor;
+import modelo.Filme;
+import modelo.InfoCatalogo;
 import enums.Categoria;
 
 /**
  *
  * @author lucas
  */
+
+
 public class TesteCalcularEstrelas {
     public static void main(String[] args) {
         Cliente cliente;
         Usuario usuario;
         Video video;
+        InfoCatalogo descricao;
         List<Ator> atores = new ArrayList<Ator>();
         Ator ator1 = new Ator("Lucas Ator");
         Ator ator2 = new Ator("Joao Ator2");
@@ -38,8 +43,10 @@ public class TesteCalcularEstrelas {
         contTempoAssistido2 = 190.3; // Assistiu o filme todo, mas nao os creditos.
         
         cliente = new Cliente("lucas","lucas.bertellimartins@gmail.com");
-        video = new Video("Matrix", 18, 200.5, 10.2, atores, direcao, categorias);
-        System.out.println("nome do video: " + video.getNome() + " estrelas antes: " + video.getEstrelas());
+        //video = new Video("Matrix", 18, 200.5, 10.2, atores, direcao, categorias);
+        descricao = new InfoCatalogo("Matriz", 18, atores, direcao, categorias); // criando caracteristicas gerais de um filme/serie
+        video = new Filme("Aqui vai a sinopse do filme", contTempoAssistido, contTempoAssistido2, descricao); // caracteristicas especificas de um filme/episodio
+        System.out.println("nome do video: " + video.getDescricao().getNome() + " estrelas antes: " + video.getDescricao().getEstrelas());
         try{
             for(int i = 0; i < 4; i++){
                 usuario = new Usuario("usu" + i, "senha" + i);
@@ -47,7 +54,7 @@ public class TesteCalcularEstrelas {
                 
                 usuario.startVideo(video);                
                 usuario.stopVideo(video, contTempoAssistido);
-                usuario.avaliar(video, 2.5, usuario);                
+                usuario.avaliar(video, 2.5);                
             }    
         } catch (MaxUsersException e){
             System.out.println(e.getMessage());
@@ -57,10 +64,10 @@ public class TesteCalcularEstrelas {
         cliente.addUsuario(usuario);                
         usuario.startVideo(video);                
         usuario.stopVideo(video, contTempoAssistido2);
-        usuario.avaliar(video, 5.0, usuario);               
+        usuario.avaliar(video, 5.0);               
         
-        video.calcularEstrelas();
-        System.out.println("nome do video: " + video.getNome() + " estrelas depois: " + video.getEstrelas());
+        video.getDescricao().calcularEstrelas();
+        System.out.println("nome do video: " + video.getDescricao().getNome() + " estrelas depois: " + video.getDescricao().getEstrelas());
         System.out.println("Categorias do Filme: " + categorias);
         
         
