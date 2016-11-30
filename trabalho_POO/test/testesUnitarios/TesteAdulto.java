@@ -7,7 +7,7 @@ package testesUnitarios;
 
 
 import modelo.Adulto;
-import modelo.Usuario;
+
 
 /**
  *
