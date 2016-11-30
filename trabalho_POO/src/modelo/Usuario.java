@@ -35,14 +35,16 @@ public class Usuario {
     
     private String login;
     private String senha;
+    protected int idade;
     private List<Video> videosAssistidos;
     private List<Video> videosAssistirFuturo;
-    private Map<Video, Double> videosSendoAssistidos;
+    protected Map<Video, Double> videosSendoAssistidos;
 
     
-    public Usuario(String login, String senha){
+    public Usuario(String login, String senha, int idade){
         this.login = login;
         this.senha = senha;
+        this.idade = idade;
         this.videosAssistidos = new ArrayList<Video>();
         this.videosAssistirFuturo = new ArrayList<Video>();
         this.videosSendoAssistidos = new HashMap<Video, Double>();
@@ -92,9 +94,17 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public void setIdade(int idade){
+        this.idade = idade;
+    }
 
     public String getLogin() {
         return login;
+    }
+    
+    public int getIdade(){
+        return idade;
     }
     
 }
