@@ -12,5 +12,5 @@ package modelo;
 public class Adulto extends Usuario{
     public Adulto(String login, String senha ) {
         super(login, senha);
-}
+    }
 }
